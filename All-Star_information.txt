@@ -1,4 +1,4 @@
-All-Star:
+﻿All-Star:
 	徐泽化：GitHub's nickname is Pined_Friday
 	
 	汪鲲：GitHub's nickname is Walker
@@ -12,7 +12,7 @@ All-Star:
 	萧毅文：GitHub's nickname is IVANEEE
 	欧阳帆：Github’s nickname is Yvan-tech
 	李瑄宜：Github的昵称是llzxerw
-	
+	刘腾飞：GitHub's nickname is hero8686
 
 
 
