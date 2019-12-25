@@ -11,9 +11,6 @@ All-Star:
 
 
 
-
-
-
 操作流程：
 	1. 进入自己的 j18_workspace/base-repository  文件夹下
 	2. 右键打开  Git Bash Here
