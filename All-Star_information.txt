@@ -1,0 +1,22 @@
+All-Star:
+	徐泽化：GitHub's nickname is Pined_Friday
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+操作流程：
+	1. 进入自己的 j18_workspace/base-repository  文件夹下
+	2. 右键打开  Git Bash Here
+	3. 输入 git clone https://github.com/void889275714/repository18.git
+	下载下来之后就可以提交了，提交流程按 git add commit (pull)push 
+	*第一次上传需要写自己的用户信息
