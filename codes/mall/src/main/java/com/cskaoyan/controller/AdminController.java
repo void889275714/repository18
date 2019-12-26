@@ -2,12 +2,17 @@ package com.cskaoyan.controller;
 
 import com.cskaoyan.bean.BaseRespVo;
 import com.cskaoyan.bean.LoginBean;
+import com.cskaoyan.bean.User;
+import com.cskaoyan.mapper.UserMapper;
+import com.cskaoyan.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class AdminController {
@@ -47,6 +52,17 @@ public class AdminController {
         baseRespVo.setData(map);
 
         return baseRespVo;
+    }
+
+
+    //分页测试
+    @Autowired
+    UserService userService;
+
+    @RequestMapping("user/list")
+    public List<User> userList(int pageNum,int pageSize){
+        List<User> users = userService.queryUsers(pageNum, pageSize);
+        return users;
     }
 
 
