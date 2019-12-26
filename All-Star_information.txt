@@ -1,12 +1,18 @@
-All-Star:
+﻿All-Star:
 	徐泽化：GitHub's nickname is Pined_Friday
+	
+	汪鲲：GitHub's nickname is Walker
+	职业：Java工程师
+	爱好：bilibili，小说，漫画，主机游戏，看书 
+	签名：我挥舞着键盘和本子，发誓要把世界写个明明白白 
+	博客：sanjiuchu.cn
+	地址：C9-409
 
-
-
-
-
-
-
+	高琦：GitHub's nickname is Bruce-morty
+	萧毅文：GitHub's nickname is IVANEEE
+	欧阳帆：Github’s nickname is Yvan-tech
+	李瑄宜：Github的昵称是llzxerw
+	刘腾飞：GitHub's nickname is hero8686
 
 
 
@@ -18,5 +24,5 @@ All-Star:
 	1. 进入自己的 j18_workspace/base-repository  文件夹下
 	2. 右键打开  Git Bash Here
 	3. 输入 git clone https://github.com/void889275714/repository18.git
-	下载下来之后就可以提交了，提交流程按 git add commit (pull)push 
+	下载下来之后就可以提交了，提交流程按 git add commit (pull)push
 	*第一次上传需要写自己的用户信息
