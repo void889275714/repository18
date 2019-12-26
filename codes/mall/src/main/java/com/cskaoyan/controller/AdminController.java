@@ -66,4 +66,38 @@ public class AdminController {
     }
 
 
+ @Autowired
+    RegionService regionService;
+    /**
+     * 商场管理-->行政区域
+     *
+     */
+    @RequestMapping("admin/region/list")
+    public BaseRespVo list(){
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        List<Region> list = regionService.list();
+        baseRespVo.setData(list);
+        return baseRespVo;
+    }
+
+
+
+
+    @Autowired
+    KeyWordService keyWordService;
+    /**
+     * 商场管理--> 关键词
+     */
+    @RequestMapping("admin/keyword/list")
+    public BaseRespVo keyWordList(int page, int limit,String keyword,String url,String sort,String order) {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        Map<String, Object> map = keyWordService.queryKeyWord(page,limit,keyword,url);
+        baseRespVo.setData(map);
+        return baseRespVo;
+    }
+
 }
