@@ -1,10 +1,9 @@
 package com.cskaoyan.controller;
 
-import com.cskaoyan.bean.*;
-import com.cskaoyan.mapper.UserMapper;
-import com.cskaoyan.service.KeyWordService;
-import com.cskaoyan.service.RegionService;
-import com.cskaoyan.service.UserService;
+import com.cskaoyan.bean.BaseRespVo;
+import com.cskaoyan.bean.ListCondition;
+import com.cskaoyan.bean.LoginBean;
+import com.cskaoyan.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * @author bruce
+ * 用户管理模块的API
+ */
 @RestController
 public class AdminController {
+
+    @Autowired
+    AdminService adminService;
+
+
 
     /**
      * {
@@ -28,11 +36,20 @@ public class AdminController {
     @RequestMapping("admin/auth/login")
     public BaseRespVo login(@RequestBody LoginBean loginBean) {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
-        baseRespVo.setErrno(0);
-        //data的值以后还要修改，因为info 请求会用到
-        baseRespVo.setData("All-Star");
-        baseRespVo.setErrmsg("成功");
-        return baseRespVo;
+       /* String username = loginBean.getUsername();
+        String password = loginBean.getPassword();
+        boolean flag = adminService.queryAdminForLogin(username,password);*/
+        /*if (flag) {
+            baseRespVo.setErrno(0);
+            //data的值以后还要修改，因为info 请求会用到*/
+            baseRespVo.setData("All-Star");
+            baseRespVo.setErrmsg("成功");
+            return baseRespVo;
+       /* } else {
+            baseRespVo.setErrno(605);
+            baseRespVo.setErrmsg("用户账号或密码不正确");
+            return baseRespVo;
+        }*/
     }
 
 
@@ -51,54 +68,92 @@ public class AdminController {
         map.put("roles",roleList);
         map.put("perms",permList);
         baseRespVo.setData(map);
-
         return baseRespVo;
     }
 
-
-    //分页测试
-    @Autowired
-    UserService userService;
-
-    @RequestMapping("user/list")
-    public List<User> userList(int pageNum,int pageSize){
-        List<User> users = userService.queryUsers(pageNum, pageSize);
-        return users;
-    }
-
-
-    @Autowired
-    RegionService regionService;
     /**
-     * 商场管理-->行政区域
-     *
+     * 用户管理模块，显示用户管理页面和插叙用户的方法
+     * @author bruce-g
+     * @param requestBody
+     * @return
      */
-    @RequestMapping("admin/region/list")
-    public BaseRespVo list(){
+    @RequestMapping("admin/user/list")
+    public BaseRespVo managerUser(ListCondition requestBody) {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        Map returnMap = adminService.queryUsers(requestBody);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
-        List<Region> list = regionService.list();
-        baseRespVo.setData(list);
+        baseRespVo.setData(returnMap);
         return baseRespVo;
     }
 
-
-
-
-    @Autowired
-    KeyWordService keyWordService;
     /**
-     * 商场管理--> 关键词
+     *用户管理模块中的收货地址
+     * @param listCondition
+     * @return
      */
-    @RequestMapping("admin/keyword/list")
-    public BaseRespVo keyWordList(ListCondition listCondition) {
-        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+    @RequestMapping("admin/address/list")
+    public BaseRespVo addressList(ListCondition listCondition) {
+        BaseRespVo baseRespVo = new BaseRespVo();
+
+            Map map = adminService.queryAddress(listCondition);
+            baseRespVo.setErrno(0);
+            baseRespVo.setErrmsg("成功");
+            baseRespVo.setData(map);
+        return baseRespVo;
+    }
+
+    /**
+     * 会员收藏模块
+     * @return
+     */
+    @RequestMapping("admin/collect/list")
+    public BaseRespVo userCollect(ListCondition listCondition) {
+        BaseRespVo baseRespVo = new BaseRespVo();
+        Map map = adminService.queryUserCollectList(listCondition);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
-        Map<String, Object> map = keyWordService.queryKeyWord(listCondition.getPage(),listCondition.getLimit(),listCondition.getKeyword(),listCondition.getUrl(),listCondition.getSort(),listCondition.getOrder());
         baseRespVo.setData(map);
         return baseRespVo;
     }
 
+    /**
+     * 会员的足迹显示
+     */
+    @RequestMapping("admin/footprint/list")
+    public BaseRespVo UserFootPrint(ListCondition listCondition) {
+        BaseRespVo baseRespVo = new BaseRespVo();
+        Map map = adminService.queryUserFootPrint(listCondition);
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        baseRespVo.setData(map);
+        return baseRespVo;
+    }
+
+    /**
+     * 搜索历史模块的方法，包括展示和搜索功能
+     *
+     */
+    @RequestMapping("admin/history/list")
+    public BaseRespVo SearchHistory(ListCondition listCondition) {
+        BaseRespVo baseRespVo = new BaseRespVo();
+        Map map = adminService.queryUserSearchHistory(listCondition);
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        baseRespVo.setData(map);
+        return baseRespVo;
+    }
+
+    /**
+     * 意见反馈的模块
+     */
+    @RequestMapping("admin/feedback/list")
+    public BaseRespVo UserFeedback(ListCondition listCondition) {
+        BaseRespVo baseRespVo = new BaseRespVo();
+        Map map = adminService.queryComment(listCondition);
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        baseRespVo.setData(map);
+        return baseRespVo;
+    }
 }
