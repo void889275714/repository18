@@ -7,5 +7,5 @@ import java.util.Map;
 
 public interface KeyWordService {
 
-    Map<String,Object> queryKeyWord(int page,int limit,String keyword,String url);
+    Map<String,Object> queryKeyWord(int page,int limit,String keyword,String url,String sort,String order);
 }

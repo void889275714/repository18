@@ -1,9 +1,9 @@
 package com.cskaoyan.controller;
 
-import com.cskaoyan.bean.BaseRespVo;
-import com.cskaoyan.bean.LoginBean;
-import com.cskaoyan.bean.User;
+import com.cskaoyan.bean.*;
 import com.cskaoyan.mapper.UserMapper;
+import com.cskaoyan.service.KeyWordService;
+import com.cskaoyan.service.RegionService;
 import com.cskaoyan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class AdminController {
@@ -66,7 +67,7 @@ public class AdminController {
     }
 
 
- @Autowired
+    @Autowired
     RegionService regionService;
     /**
      * 商场管理-->行政区域
@@ -91,11 +92,11 @@ public class AdminController {
      * 商场管理--> 关键词
      */
     @RequestMapping("admin/keyword/list")
-    public BaseRespVo keyWordList(int page, int limit,String keyword,String url,String sort,String order) {
+    public BaseRespVo keyWordList(ListCondition listCondition) {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
-        Map<String, Object> map = keyWordService.queryKeyWord(page,limit,keyword,url);
+        Map<String, Object> map = keyWordService.queryKeyWord(listCondition.getPage(),listCondition.getLimit(),listCondition.getKeyword(),listCondition.getUrl(),listCondition.getSort(),listCondition.getOrder());
         baseRespVo.setData(map);
         return baseRespVo;
     }

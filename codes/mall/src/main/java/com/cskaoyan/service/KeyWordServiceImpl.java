@@ -18,11 +18,16 @@ public class KeyWordServiceImpl implements KeyWordService{
 
 
     @Override
-    public Map<String, Object> queryKeyWord(int page, int limit, String keyword, String url) {
+    public Map<String, Object> queryKeyWord(int page, int limit, String keyword, String url, String sort, String order) {
         KeywordExample keywordExample = new KeywordExample();
+        String s = sort + " " + order;
+        keywordExample.setOrderByClause(s);
         KeywordExample.Criteria criteria = keywordExample.createCriteria();
-        if (keyword != null || url!=null) {
-            criteria.andKeywordLike("%" + keyword + "%").andUrlLike("%" + url + "%");
+        if (keyword != null ){
+            criteria.andKeywordLike("%" + keyword + "%");
+        }
+        if (url != null) {
+            criteria.andUrlLike("%" + url + "%");
         }
         List<Keyword> keywords = keywordMapper.selectByExample(keywordExample);
         HashMap<String, Object> map = new HashMap<>();
