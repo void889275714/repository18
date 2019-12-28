@@ -99,7 +99,7 @@ public class AdminServiceImpl implements AdminService {
         }
         addressExample.setOrderByClause(listCondition.getSort() + " " + listCondition.getOrder());
         List<Address> addressList = addressMapper.selectByExample(addressExample);
-        PageInfo<Address> addressPageInfo = new PageInfo<>();
+        PageInfo<Address> addressPageInfo = new PageInfo<>(addressList);
         long total = addressPageInfo.getTotal();
         HashMap<String, Object> map = new HashMap<>();
         map.put("total", total);
@@ -129,7 +129,7 @@ public class AdminServiceImpl implements AdminService {
         collectExample.setOrderByClause(listCondition.getSort() + " " + listCondition.getOrder());
         List<Collect> collectList = collectMapper.selectByExample(collectExample);
 
-        PageInfo<Address> addressPageInfo = new PageInfo<>();
+        PageInfo<Collect> addressPageInfo = new PageInfo<>(collectList);
         long total = addressPageInfo.getTotal();
         HashMap<String, Object> map = new HashMap<>();
         map.put("total", total);
@@ -158,7 +158,7 @@ public class AdminServiceImpl implements AdminService {
         }
         footprintExample.setOrderByClause(listCondition.getSort() + " " + listCondition.getOrder());
         List<Footprint> footprints = footprintMapper.selectByExample(footprintExample);
-        PageInfo<Footprint> footprintPageInfo = new PageInfo<>();
+        PageInfo<Footprint> footprintPageInfo = new PageInfo<>(footprints);
         long total = footprintPageInfo.getTotal();
         HashMap<String, Object> map = new HashMap<>();
         map.put("total", total);
@@ -187,7 +187,7 @@ public class AdminServiceImpl implements AdminService {
         }
         search_historyExample.setOrderByClause(listCondition.getSort() + " " + listCondition.getOrder());
         List<Search_history> histories = search_historyMapper.selectByExample(search_historyExample);
-        PageInfo<Search_history> pageInfo = new PageInfo<>();
+        PageInfo<Search_history> pageInfo = new PageInfo<>(histories);
         long total = pageInfo.getTotal();
         HashMap<String, Object> map = new HashMap<>();
         map.put("total", total);
@@ -215,7 +215,7 @@ public class AdminServiceImpl implements AdminService {
         }
         feedbackExample.setOrderByClause(listCondition.getSort() + " " + listCondition.getOrder());
         List<Feedback> feedbackList = feedbackMapper.selectByExample(feedbackExample);
-        PageInfo<Feedback> pageInfo = new PageInfo<>();
+        PageInfo<Feedback> pageInfo = new PageInfo<>(feedbackList);
         long total = pageInfo.getTotal();
         HashMap<String, Object> map = new HashMap<>();
         map.put("total", total);
