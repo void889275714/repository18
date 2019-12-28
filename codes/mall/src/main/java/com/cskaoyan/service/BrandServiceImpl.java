@@ -7,6 +7,7 @@ import com.cskaoyan.mapper.BrandMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class BrandServiceImpl implements BrandService{
 
 
     /**
-     * 商场管理 --> 品牌制造商 --> 显示
+     * 商场管理 --> 品牌制造商 --> 显示(查询)
      * @param page
      * @param limit
      * @param name
@@ -34,6 +35,7 @@ public class BrandServiceImpl implements BrandService{
         String brandCondition = sort + " " + order;
         brandExample.setOrderByClause(brandCondition);
         BrandExample.Criteria criteria = brandExample.createCriteria();
+        criteria.andDeletedEqualTo(false);
         if (name != null ){
             criteria.andNameLike("%" + name + "%");
         }
@@ -49,29 +51,58 @@ public class BrandServiceImpl implements BrandService{
         return map;
     }
 
+    /**
+     * 新增
+     * @param brand
+     * @return
+     */
     @Override
     public Brand createBrand(Brand brand) {
         brandMapper.insert(brand);
-        String picUrl = brand.getPicUrl();
 
+        //获取刚插入的Id
+        String picUrl = brand.getPicUrl();
         BrandExample brandExample = new BrandExample();
         brandExample.createCriteria().andPicUrlEqualTo(picUrl);
         List<Brand> brands = brandMapper.selectByExample(brandExample);
         Integer id = null;
         for (Brand brand1 : brands) {
             id = brand1.getId();
+            break;
         }
+
+
         Brand brand1 = brandMapper.selectByPrimaryKey(id);
         return brand1;
     }
 
+
+    /**
+     * 更新品牌
+     * @param brand
+     * @return
+     */
     @Override
-    public Brand updateBrand(Brand Brand) {
-        return null;
+    public Brand updateBrand(Brand brand) {
+        brandMapper.updateByPrimaryKey(brand);
+        Integer id = brand.getId();
+        Brand brand1 = brandMapper.selectByPrimaryKey(id);
+        return brand1;
     }
 
+
+    /**
+     * 假删
+     * @param brand
+     * @return
+     */
     @Override
-    public boolean deleteBrand(Brand Brand) {
+    public boolean deleteBrand(Brand brand) {
+        brand.setDeleted(true);
+        int update = brandMapper.updateByPrimaryKey(brand);
+        if (update > 0) {
+            return true;
+        }
         return false;
     }
 }

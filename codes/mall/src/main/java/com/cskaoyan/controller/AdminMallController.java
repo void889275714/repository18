@@ -2,6 +2,7 @@ package com.cskaoyan.controller;
 
 import com.cskaoyan.bean.*;
 import com.cskaoyan.service.*;
+import com.cskaoyan.utils.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -147,42 +148,16 @@ public class AdminMallController {
     }
 
 
-   /* @Autowired
+    @Autowired
     StorageService storageService;
-    *//**
+   /* *
      * 品牌制造商 --> 添加 --> Before
      * 在品牌添加里面有一个商品图片的上传
      * @return
-     *//*
+     * */
     @RequestMapping("admin/storage/create")
     public BaseRespVo mallFileUpload(MultipartFile file) throws IOException {
-        String uuid = UUID.randomUUID().toString();
-        String filename = file.getOriginalFilename();
-        String contentType = file.getContentType();
-        long size = file.getSize();
-
-        //创建storage中key的内容为uuid
-        int i = filename.lastIndexOf(".");
-        String substring = filename.substring(i);
-        uuid += substring;
-
-        //文件上传
-        String url = "D:\\project21226\\code\\mall\\day1\\demo1\\target\\classes\\static";
-        File file1 = new File(url,uuid);
-        file.transferTo(file1);
-
-        //将信息封装到javabean中
-        Storage storage = new Storage();
-        storage.setKey(uuid);
-        storage.setName(filename);
-        storage.setSize((int) size);
-        storage.setUrl("http://localhost:8081/"+uuid);
-        storage.setType(contentType);
-        storage.setDeleted(false);
-        Date date = new Date();
-        storage.setAddTime(date);
-        storage.setUpdateTime(date);
-
+        Storage storage = FileUploadUtil.uploadReturnStorage(file);
         //将数据保存到数据库
         int i1 = storageService.insertStorage(storage);
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
@@ -194,10 +169,15 @@ public class AdminMallController {
         }
         baseRespVo.setData(data);
         return baseRespVo;
-    }*/
+    }
 
 
-
+    /**
+     * 品牌制造商 --> 新增
+     * @param brand
+     * @return
+     * @throws ParseException
+     */
     @RequestMapping("admin/brand/create")
     public BaseRespVo brandCreate(@RequestBody Brand brand) throws ParseException {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
@@ -217,6 +197,40 @@ public class AdminMallController {
 
     }
 
+    /**
+     * 品牌制造商 --> 编辑
+     */
+    @RequestMapping("admin/brand/update")
+    public BaseRespVo brandUpdate(@RequestBody Brand brand) throws ParseException {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(new Date());
+        Date parse = simpleDateFormat.parse(format);
+        brand.setUpdateTime(parse);
+
+        //增加跟修改用同一个方法吧
+        Brand data= brandService.updateBrand(brand);
+        baseRespVo.setData(data);
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+
+
+    /**
+     * 品牌制造商 --> 删除
+     */
+    @RequestMapping("admin/brand/delete")
+    public BaseRespVo brandDelete(@RequestBody Brand brand){
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        boolean data= brandService.deleteBrand(brand);
+        if (data) {
+            baseRespVo.setErrno(0);
+            baseRespVo.setErrmsg("成功");
+        }
+        return baseRespVo;
+    }
 
 
 
@@ -308,5 +322,110 @@ public class AdminMallController {
         return baseRespVo;
     }
 
+
+    /*--------------------------------------商品类目--------------------------------------------*/
+
+
+    @Autowired
+    CateGoryService cateGoryService;
+
+
+    /**
+     * 商品类目 --> 显示(除类目名之外的)
+     */
+    @RequestMapping("admin/category/list")
+    public BaseRespVo cateGoryShow(){
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        List<CateGory> cateGories = cateGoryService.cateList();
+        baseRespVo.setData(cateGories);
+        return baseRespVo;
+    }
+
+    /**
+     * 商品类目 --> 显示类目名
+     * value: Level:L1 的 id
+     * label : Level:L1 的 name
+     */
+    @RequestMapping("admin/category/l1")
+    public BaseRespVo cateGoryL1Show(){
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        List<Map<String,Object>> cateGoriesName = cateGoryService.cateL1List();
+        baseRespVo.setData(cateGoriesName);
+        return baseRespVo;
+    }
+
+
+    /**
+     * 商品类目 --> 新增类目
+     * @param cateGory
+     * @return
+     * @throws ParseException
+     */
+    @RequestMapping("admin/category/create")
+    public BaseRespVo categoryCreate(@RequestBody CateGory cateGory) throws ParseException {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(new Date());
+        Date parse = simpleDateFormat.parse(format);
+        cateGory.setAddTime(parse);
+        cateGory.setUpdateTime(parse);
+        cateGory.setDeleted(false);
+
+        CateGory data= cateGoryService.createCategory(cateGory);
+        baseRespVo.setData(data);
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+
+    }
+
+
+    /**
+     * 商品类目 --> 修改
+     * 如果一级标题改为二级标题，children的怎么办? 这也是个bug
+     * @param cateGory
+     * @return
+     * @throws ParseException
+     */
+    @RequestMapping("admin/category/update")
+    public BaseRespVo categoryUpdate(@RequestBody CateGory cateGory) throws ParseException {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(new Date());
+        Date parse = simpleDateFormat.parse(format);
+        cateGory.setUpdateTime(parse);
+
+        //增加跟修改用同一个方法吧
+        CateGory data= cateGoryService.updateCateGory(cateGory);
+        baseRespVo.setData(data);
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+
+
+    /**
+     * 商品类目 --> 假删
+     * 请求体: Json 数据
+     * 响应体:
+     * {"errno":0,"errmsg":"成功"}
+     */
+    @RequestMapping("admin/category/delete")
+    public BaseRespVo categoryDelete(@RequestBody CateGory cateGory){
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        boolean data= cateGoryService.deleteCateGory(cateGory);
+        if (data) {
+            baseRespVo.setErrno(0);
+            baseRespVo.setErrmsg("成功");
+        }
+        return baseRespVo;
+    }
 
 }
