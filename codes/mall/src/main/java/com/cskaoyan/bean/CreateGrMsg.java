@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.configmall;
+package com.cskaoyan.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

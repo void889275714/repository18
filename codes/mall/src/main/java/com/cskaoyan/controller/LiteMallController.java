@@ -1,10 +1,13 @@
-package com.cskaoyan.controller.configmall;
+package com.cskaoyan.controller;
 
 
-import com.cskaoyan.bean.configmall.*;
+import com.cskaoyan.bean.FreightMsg;
+import com.cskaoyan.bean.MallMsg;
+import com.cskaoyan.bean.OrderMsg;
+import com.cskaoyan.bean.WxMsg;
 
 import com.cskaoyan.bean.configmall.BaseRespVo;
-import com.cskaoyan.service.configmall.LiteMallService;
+import com.cskaoyan.service.LiteMallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

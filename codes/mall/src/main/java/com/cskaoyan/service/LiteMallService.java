@@ -1,10 +1,10 @@
-package com.cskaoyan.service.configmall;
+package com.cskaoyan.service;
 
 
-import com.cskaoyan.bean.configmall.FreightMsg;
-import com.cskaoyan.bean.configmall.MallMsg;
-import com.cskaoyan.bean.configmall.OrderMsg;
-import com.cskaoyan.bean.configmall.WxMsg;
+import com.cskaoyan.bean.FreightMsg;
+import com.cskaoyan.bean.MallMsg;
+import com.cskaoyan.bean.OrderMsg;
+import com.cskaoyan.bean.WxMsg;
 
 import java.util.Map;
 

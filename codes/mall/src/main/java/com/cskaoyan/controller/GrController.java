@@ -1,10 +1,10 @@
-package com.cskaoyan.controller.configmall;
+package com.cskaoyan.controller;
 
 import com.cskaoyan.bean.Groupon_rules;
 import com.cskaoyan.bean.configmall.BaseRespVo;
-import com.cskaoyan.bean.configmall.CreateGrMsg;
-import com.cskaoyan.bean.configmall.ListGrCondition;
-import com.cskaoyan.service.configmall.GrService;
+import com.cskaoyan.bean.CreateGrMsg;
+import com.cskaoyan.bean.ListGrCondition;
+import com.cskaoyan.service.GrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

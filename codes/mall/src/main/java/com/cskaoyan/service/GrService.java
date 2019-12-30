@@ -1,8 +1,8 @@
-package com.cskaoyan.service.configmall;
+package com.cskaoyan.service;
 
 import com.cskaoyan.bean.Groupon_rules;
-import com.cskaoyan.bean.configmall.CreateGrMsg;
-import com.cskaoyan.bean.configmall.ListGrCondition;
+import com.cskaoyan.bean.CreateGrMsg;
+import com.cskaoyan.bean.ListGrCondition;
 
 import java.util.Map;
 

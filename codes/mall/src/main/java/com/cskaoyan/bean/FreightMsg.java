@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.configmall;
+package com.cskaoyan.bean;
 
 import lombok.Data;
 
