@@ -2,6 +2,8 @@ package com.cskaoyan.bean;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Description TODO
  * @Date 2019-12-27 10:19
@@ -32,4 +34,12 @@ public class ListCondition {
     String valueId;
     String goodsId;
     String id;
+    int couponId;
+    int type;
+    String status;
+    String title;
+    String subtitle;
+    String content;
+    String orderSn;
+    List<Short> orderStatusArray;
 }

@@ -27,4 +27,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectUserByName(String username);
+
+    List<User> selectUsers();
 }

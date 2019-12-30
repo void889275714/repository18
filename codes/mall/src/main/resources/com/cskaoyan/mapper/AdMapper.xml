@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cskaoyan.mapper.promote.AdMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.promote.Ad">
+<mapper namespace="com.cskaoyan.mapper.AdMapper">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.Ad">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="link" jdbcType="VARCHAR" property="link" />
@@ -77,7 +77,7 @@
     id, name, link, url, position, content, start_time, end_time, enabled, add_time, 
     update_time, deleted
   </sql>
-  <select id="selectByExample" parameterType="com.cskaoyan.bean.promote.AdExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.AdExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -101,13 +101,13 @@
     delete from cskaoyan_mall_ad
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.promote.AdExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.AdExample">
     delete from cskaoyan_mall_ad
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.bean.promote.Ad">
+  <insert id="insert" parameterType="com.cskaoyan.bean.Ad">
     insert into cskaoyan_mall_ad (id, name, link, 
       url, position, content, 
       start_time, end_time, enabled, 
@@ -119,10 +119,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.bean.promote.Ad">
-    <selectKey order="AFTER" resultType="int" keyProperty="id" keyColumn="id">
-      select last_insert_id() as id
-    </selectKey>
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.Ad">
     insert into cskaoyan_mall_ad
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -201,7 +198,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cskaoyan.bean.promote.AdExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.AdExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_ad
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -269,7 +266,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.promote.Ad">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.Ad">
     update cskaoyan_mall_ad
     <set>
       <if test="name != null">
@@ -308,7 +305,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.promote.Ad">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.Ad">
     update cskaoyan_mall_ad
     set name = #{name,jdbcType=VARCHAR},
       link = #{link,jdbcType=VARCHAR},

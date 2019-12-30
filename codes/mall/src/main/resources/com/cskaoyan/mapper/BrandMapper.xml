@@ -12,6 +12,10 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
+  <resultMap id="OyfResultMap" type="com.cskaoyan.bean.BrandForReturnBean">
+    <id column="id" jdbcType="INTEGER" property="value"/>
+    <id column="name" jdbcType="VARCHAR" property="label"/>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -272,4 +276,7 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectBrandForReturn" resultMap="OyfResultMap">
+    select id, name from cskaoyan_mall_brand
+  </select>
 </mapper>

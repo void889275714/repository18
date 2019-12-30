@@ -27,7 +27,7 @@ public class MallOrderServiceImpl implements MallOrderService {
     @Autowired
     Order_goodsMapper orderGoodsMapper;
     @Autowired
-    Goods_specificationMapper goods_specificationMapper;
+    GoodsSpecificationMapper goods_specificationMapper;
 
     /**
      * 订单的展示和搜索功能

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface AdminService {
 
-    boolean queryAdminForLogin(String username,String password);
+    boolean queryAdminForLogin(String username, String password);
 
     Map queryUsers(ListCondition listCondition);
 

@@ -116,9 +116,6 @@
       #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan.bean.Groupon_rules">
-    <selectKey order="AFTER" resultType="integer" keyColumn="id" keyProperty="id">
-      select last_insert_id() as id
-    </selectKey>
     insert into cskaoyan_mall_groupon_rules
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

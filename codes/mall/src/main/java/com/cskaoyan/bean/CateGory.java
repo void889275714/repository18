@@ -3,6 +3,7 @@ package com.cskaoyan.bean;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
+import java.util.List;
 
 public class CateGory {
     private Integer id;
@@ -30,7 +31,7 @@ public class CateGory {
     private Date updateTime;
 
     private Boolean deleted;
-	
+
 	public List<CateGory> getChildren() {
         return children;
     }

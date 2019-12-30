@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cskaoyan.mapper.promote.topicMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.promote.topic">
+<mapper namespace="com.cskaoyan.mapper.topicMapper">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.topic">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
@@ -14,7 +14,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cskaoyan.bean.promote.topic">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cskaoyan.bean.topic">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -82,7 +82,7 @@
   <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.cskaoyan.bean.promote.topicExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.cskaoyan.bean.topicExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -98,7 +98,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.cskaoyan.bean.promote.topicExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.topicExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -124,13 +124,13 @@
     delete from cskaoyan_mall_topic
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.promote.topicExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.topicExample">
     delete from cskaoyan_mall_topic
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.bean.promote.topic">
+  <insert id="insert" parameterType="com.cskaoyan.bean.topic">
     insert into cskaoyan_mall_topic (id, title, subtitle, 
       price, read_count, pic_url, 
       sort_order, goods, add_time, 
@@ -142,10 +142,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.bean.promote.topic">
-    <selectKey order="AFTER" resultType="int" keyProperty="id" keyColumn="id">
-      select last_insert_id() as id
-    </selectKey>
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.topic">
     insert into cskaoyan_mall_topic
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -224,7 +221,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cskaoyan.bean.promote.topicExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.topicExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_topic
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -309,7 +306,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.promote.topic">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.topic">
     update cskaoyan_mall_topic
     <set>
       <if test="title != null">
@@ -348,7 +345,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cskaoyan.bean.promote.topic">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cskaoyan.bean.topic">
     update cskaoyan_mall_topic
     set title = #{title,jdbcType=VARCHAR},
       subtitle = #{subtitle,jdbcType=VARCHAR},
@@ -363,7 +360,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.promote.topic">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.topic">
     update cskaoyan_mall_topic
     set title = #{title,jdbcType=VARCHAR},
       subtitle = #{subtitle,jdbcType=VARCHAR},

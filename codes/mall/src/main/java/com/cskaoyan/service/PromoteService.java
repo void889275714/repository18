@@ -1,10 +1,10 @@
-package com.cskaoyan.service.promote;
+package com.cskaoyan.service;
 
 import com.cskaoyan.bean.ListCondition;
-import com.cskaoyan.bean.promote.Ad;
-import com.cskaoyan.bean.promote.Coupon;
-import com.cskaoyan.bean.promote.CouponExample;
-import com.cskaoyan.bean.promote.topic;
+import com.cskaoyan.bean.Ad;
+import com.cskaoyan.bean.Coupon;
+import com.cskaoyan.bean.CouponExample;
+import com.cskaoyan.bean.topic;
 
 import java.util.List;
 import java.util.Map;

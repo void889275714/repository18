@@ -1,7 +1,7 @@
-package com.cskaoyan.mapper.promote;
+package com.cskaoyan.mapper;
 
-import com.cskaoyan.bean.promote.topic;
-import com.cskaoyan.bean.promote.topicExample;
+import com.cskaoyan.bean.topic;
+import com.cskaoyan.bean.topicExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

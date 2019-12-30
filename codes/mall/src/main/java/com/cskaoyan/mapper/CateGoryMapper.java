@@ -3,6 +3,8 @@ package com.cskaoyan.mapper;
 import com.cskaoyan.bean.CateGory;
 import com.cskaoyan.bean.CateGoryExample;
 import java.util.List;
+
+import com.cskaoyan.bean.CateGoryForReturnBean;
 import org.apache.ibatis.annotations.Param;
 
 public interface CateGoryMapper {
@@ -27,4 +29,6 @@ public interface CateGoryMapper {
     int updateByPrimaryKeySelective(CateGory record);
 
     int updateByPrimaryKey(CateGory record);
+
+    List<CateGoryForReturnBean> selectFatherAndSonCategory();
 }

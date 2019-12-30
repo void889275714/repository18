@@ -1,7 +1,7 @@
-package com.cskaoyan.mapper.promote;
+package com.cskaoyan.mapper;
 
-import com.cskaoyan.bean.promote.Coupon;
-import com.cskaoyan.bean.promote.CouponExample;
+import com.cskaoyan.bean.Coupon;
+import com.cskaoyan.bean.CouponExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

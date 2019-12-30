@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.promote;
+package com.cskaoyan.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

@@ -1,11 +1,11 @@
-package com.cskaoyan.service.promote;
+package com.cskaoyan.service;
 
 import com.cskaoyan.bean.ListCondition;
-import com.cskaoyan.bean.promote.*;
-import com.cskaoyan.mapper.promote.AdMapper;
-import com.cskaoyan.mapper.promote.CouponMapper;
-import com.cskaoyan.mapper.promote.Coupon_userMapper;
-import com.cskaoyan.mapper.promote.topicMapper;
+import com.cskaoyan.bean.*;
+import com.cskaoyan.mapper.AdMapper;
+import com.cskaoyan.mapper.CouponMapper;
+import com.cskaoyan.mapper.Coupon_userMapper;
+import com.cskaoyan.mapper.topicMapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
