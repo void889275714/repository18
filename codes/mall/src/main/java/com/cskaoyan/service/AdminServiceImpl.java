@@ -129,7 +129,7 @@ public class AdminServiceImpl implements AdminService {
         collectExample.setOrderByClause(listCondition.getSort() + " " + listCondition.getOrder());
         List<Collect> collectList = collectMapper.selectByExample(collectExample);
 
-        PageInfo<Address> addressPageInfo = new PageInfo<>();
+        PageInfo<Address> addressPageInfo = new PageInfo<>(collectList);
         long total = addressPageInfo.getTotal();
         HashMap<String, Object> map = new HashMap<>();
         map.put("total", total);
