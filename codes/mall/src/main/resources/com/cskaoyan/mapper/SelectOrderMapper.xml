@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mapper.SelectOrderMapper">
+    <sql id="Base_Column_List">
+    id, user_id, order_sn, order_status, consignee, mobile, address, message, goods_price,
+    freight_price, coupon_price, integral_price, groupon_price, order_price, actual_price,
+    pay_id, pay_time, ship_sn, ship_channel, ship_time, confirm_time, comments, end_time,
+    add_time, update_time, deleted
+  </sql>
+    <select id="queryOrderByMyself" resultType="com.cskaoyan.bean.Order">
+        select  <include refid="Base_Column_List" />
+        from cskaoyan_mall_order
+        <where>
+            <if test="user_id != null">
+             user_id = #{userId}
+            </if>
+            <if test="order_sn != null">
+                order_sn = #{orderSn}
+            </if>
+            <if test="order_status != null">
+                <foreach collection="orderStatusArray" item="orderStatus" separator="," open="(" close=")">
+                  #{orderStatus}
+            </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>

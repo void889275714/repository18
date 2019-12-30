@@ -1,45 +1,26 @@
 package com.cskaoyan.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class CateGory {
+public class Brand {
     private Integer id;
 
     private String name;
 
-    private String keywords;
-
     private String desc;
-
-    private Integer pid;
-
-    private String iconUrl;
 
     private String picUrl;
 
-    private String level;
-
     private Byte sortOrder;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "CMT+8")
+    private BigDecimal floorPrice;
+
     private Date addTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "CMT+8")
     private Date updateTime;
 
     private Boolean deleted;
-	
-	public List<CateGory> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<CateGory> children) {
-        this.children = children;
-    }
-
-    List<CateGory> children;
 
     public Integer getId() {
         return id;
@@ -57,36 +38,12 @@ public class CateGory {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(String keywords) {
-        this.keywords = keywords == null ? null : keywords.trim();
-    }
-
     public String getDesc() {
         return desc;
     }
 
     public void setDesc(String desc) {
         this.desc = desc == null ? null : desc.trim();
-    }
-
-    public Integer getPid() {
-        return pid;
-    }
-
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
-
-    public String getIconUrl() {
-        return iconUrl;
-    }
-
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl == null ? null : iconUrl.trim();
     }
 
     public String getPicUrl() {
@@ -97,20 +54,20 @@ public class CateGory {
         this.picUrl = picUrl == null ? null : picUrl.trim();
     }
 
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level == null ? null : level.trim();
-    }
-
     public Byte getSortOrder() {
         return sortOrder;
     }
 
     public void setSortOrder(Byte sortOrder) {
         this.sortOrder = sortOrder;
+    }
+
+    public BigDecimal getFloorPrice() {
+        return floorPrice;
+    }
+
+    public void setFloorPrice(BigDecimal floorPrice) {
+        this.floorPrice = floorPrice;
     }
 
     public Date getAddTime() {

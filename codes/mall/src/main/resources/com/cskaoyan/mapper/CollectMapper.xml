@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cskaoyan.mapper.Groupon_rulesMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.Groupon_rules">
+<mapper namespace="com.cskaoyan.mapper.CollectMapper">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.Collect">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
-    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
-    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
-    <result column="discount" jdbcType="DECIMAL" property="discount" />
-    <result column="discount_member" jdbcType="INTEGER" property="discountMember" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="value_id" jdbcType="INTEGER" property="valueId" />
+    <result column="type" jdbcType="TINYINT" property="type" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -72,16 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, goods_id, goods_name, pic_url, discount, discount_member, add_time, update_time, 
-    expire_time, deleted
+    id, user_id, value_id, type, add_time, update_time, deleted
   </sql>
-  <select id="selectByExample" parameterType="com.cskaoyan.bean.Groupon_rulesExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.CollectExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from cskaoyan_mall_groupon_rules
+    from cskaoyan_mall_collect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,64 +88,47 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from cskaoyan_mall_groupon_rules
+    from cskaoyan_mall_collect
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from cskaoyan_mall_groupon_rules
+    delete from cskaoyan_mall_collect
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.Groupon_rulesExample">
-    delete from cskaoyan_mall_groupon_rules
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.CollectExample">
+    delete from cskaoyan_mall_collect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.bean.Groupon_rules">
-    insert into cskaoyan_mall_groupon_rules (id, goods_id, goods_name, 
-      pic_url, discount, discount_member, 
-      add_time, update_time, expire_time, 
+  <insert id="insert" parameterType="com.cskaoyan.bean.Collect">
+    insert into cskaoyan_mall_collect (id, user_id, value_id, 
+      type, add_time, update_time, 
       deleted)
-    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
-      #{picUrl,jdbcType=VARCHAR}, #{discount,jdbcType=DECIMAL}, #{discountMember,jdbcType=INTEGER}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{valueId,jdbcType=INTEGER}, 
+      #{type,jdbcType=TINYINT}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.bean.Groupon_rules">
-<<<<<<< HEAD
-    <selectKey order="AFTER" resultType="integer" keyColumn="id" keyProperty="id">
-      select last_insert_id() as id
-    </selectKey>
-=======
->>>>>>> cb9087a8db5bfea50f10aef15ba95b94980b2266
-    insert into cskaoyan_mall_groupon_rules
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.Collect">
+    insert into cskaoyan_mall_collect
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="goodsId != null">
-        goods_id,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="goodsName != null">
-        goods_name,
+      <if test="valueId != null">
+        value_id,
       </if>
-      <if test="picUrl != null">
-        pic_url,
-      </if>
-      <if test="discount != null">
-        discount,
-      </if>
-      <if test="discountMember != null">
-        discount_member,
+      <if test="type != null">
+        type,
       </if>
       <if test="addTime != null">
         add_time,
       </if>
       <if test="updateTime != null">
         update_time,
-      </if>
-      <if test="expireTime != null">
-        expire_time,
       </if>
       <if test="deleted != null">
         deleted,
@@ -159,20 +138,14 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="goodsId != null">
-        #{goodsId,jdbcType=INTEGER},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
-      <if test="goodsName != null">
-        #{goodsName,jdbcType=VARCHAR},
+      <if test="valueId != null">
+        #{valueId,jdbcType=INTEGER},
       </if>
-      <if test="picUrl != null">
-        #{picUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="discount != null">
-        #{discount,jdbcType=DECIMAL},
-      </if>
-      <if test="discountMember != null">
-        #{discountMember,jdbcType=INTEGER},
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
       </if>
       <if test="addTime != null">
         #{addTime,jdbcType=TIMESTAMP},
@@ -180,49 +153,37 @@
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="expireTime != null">
-        #{expireTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cskaoyan.bean.Groupon_rulesExample" resultType="java.lang.Long">
-    select count(*) from cskaoyan_mall_groupon_rules
+  <select id="countByExample" parameterType="com.cskaoyan.bean.CollectExample" resultType="java.lang.Long">
+    select count(*) from cskaoyan_mall_collect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update cskaoyan_mall_groupon_rules
+    update cskaoyan_mall_collect
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.goodsId != null">
-        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.goodsName != null">
-        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      <if test="record.valueId != null">
+        value_id = #{record.valueId,jdbcType=INTEGER},
       </if>
-      <if test="record.picUrl != null">
-        pic_url = #{record.picUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.discount != null">
-        discount = #{record.discount,jdbcType=DECIMAL},
-      </if>
-      <if test="record.discountMember != null">
-        discount_member = #{record.discountMember,jdbcType=INTEGER},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=TINYINT},
       </if>
       <if test="record.addTime != null">
         add_time = #{record.addTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.expireTime != null">
-        expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
@@ -233,38 +194,29 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update cskaoyan_mall_groupon_rules
+    update cskaoyan_mall_collect
     set id = #{record.id,jdbcType=INTEGER},
-      goods_id = #{record.goodsId,jdbcType=INTEGER},
-      goods_name = #{record.goodsName,jdbcType=VARCHAR},
-      pic_url = #{record.picUrl,jdbcType=VARCHAR},
-      discount = #{record.discount,jdbcType=DECIMAL},
-      discount_member = #{record.discountMember,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      value_id = #{record.valueId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=TINYINT},
       add_time = #{record.addTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.Groupon_rules">
-    update cskaoyan_mall_groupon_rules
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.Collect">
+    update cskaoyan_mall_collect
     <set>
-      <if test="goodsId != null">
-        goods_id = #{goodsId,jdbcType=INTEGER},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="goodsName != null">
-        goods_name = #{goodsName,jdbcType=VARCHAR},
+      <if test="valueId != null">
+        value_id = #{valueId,jdbcType=INTEGER},
       </if>
-      <if test="picUrl != null">
-        pic_url = #{picUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="discount != null">
-        discount = #{discount,jdbcType=DECIMAL},
-      </if>
-      <if test="discountMember != null">
-        discount_member = #{discountMember,jdbcType=INTEGER},
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
       </if>
       <if test="addTime != null">
         add_time = #{addTime,jdbcType=TIMESTAMP},
@@ -272,25 +224,19 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="expireTime != null">
-        expire_time = #{expireTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.Groupon_rules">
-    update cskaoyan_mall_groupon_rules
-    set goods_id = #{goodsId,jdbcType=INTEGER},
-      goods_name = #{goodsName,jdbcType=VARCHAR},
-      pic_url = #{picUrl,jdbcType=VARCHAR},
-      discount = #{discount,jdbcType=DECIMAL},
-      discount_member = #{discountMember,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.Collect">
+    update cskaoyan_mall_collect
+    set user_id = #{userId,jdbcType=INTEGER},
+      value_id = #{valueId,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
       add_time = #{addTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      expire_time = #{expireTime,jdbcType=TIMESTAMP},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
