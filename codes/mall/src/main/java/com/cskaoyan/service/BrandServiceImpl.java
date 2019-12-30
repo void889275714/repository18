@@ -4,6 +4,7 @@ import com.cskaoyan.bean.Brand;
 import com.cskaoyan.bean.BrandExample;
 import com.cskaoyan.bean.KeywordExample;
 import com.cskaoyan.mapper.BrandMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,8 @@ public class BrandServiceImpl implements BrandService{
      */
     @Override
     public Map<String, Object> queryBrand(int page, int limit, String name, int id, String sort, String order) {
+        PageHelper.startPage(page,limit);
+
         BrandExample brandExample = new BrandExample();
         String brandCondition = sort + " " + order;
         brandExample.setOrderByClause(brandCondition);
@@ -45,8 +48,8 @@ public class BrandServiceImpl implements BrandService{
         List<Brand> brands = brandMapper.selectByExample(brandExample);
 
         HashMap<String, Object> map = new HashMap<>();
-        int size = brands.size();
-        map.put("total",size);
+        long size = brandMapper.countByExample(brandExample);
+        map.put("total",(int)size);
         map.put("items",brands);
         return map;
     }

@@ -3,6 +3,7 @@ package com.cskaoyan.service;
 import com.cskaoyan.bean.Keyword;
 import com.cskaoyan.bean.KeywordExample;
 import com.cskaoyan.mapper.KeywordMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,7 @@ public class KeyWordServiceImpl implements KeyWordService{
      */
     @Override
     public Map<String, Object> queryKeyWord(int page, int limit, String keyword, String url,String sort, String order) {
+        PageHelper.startPage(page,limit);
         KeywordExample keywordExample = new KeywordExample();
         String s = sort + " " + order;
         keywordExample.setOrderByClause(s);
@@ -45,8 +47,8 @@ public class KeyWordServiceImpl implements KeyWordService{
         }
         List<Keyword> keywords = keywordMapper.selectByExample(keywordExample);
         HashMap<String, Object> map = new HashMap<>();
-        int size = keywords.size();
-        map.put("total",size);
+        long size = keywordMapper.countByExample(keywordExample);
+        map.put("total",(int)size);
         map.put("items",keywords);
         return map;
     }

@@ -4,6 +4,7 @@ import com.cskaoyan.bean.Issue;
 import com.cskaoyan.bean.IssueExample;
 import com.cskaoyan.bean.KeywordExample;
 import com.cskaoyan.mapper.IssueMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ public class IssueServiceImpl implements IssueService{
      */
     @Override
     public Map<String, Object> queryIssue(int page, int limit, String question, String sort, String order) {
+        PageHelper.startPage(page,limit);
         IssueExample issueExample = new IssueExample();
         String issueCondition = sort + " " + order;
         issueExample.setOrderByClause(issueCondition);
@@ -39,9 +41,8 @@ public class IssueServiceImpl implements IssueService{
         }
         List<Issue> issues = issueMapper.selectByExample(issueExample);
         HashMap<String, Object> map = new HashMap<>();
-        int size = issues.size();
-
-        map.put("total",size);
+        long size = issueMapper.countByExample(issueExample);
+        map.put("total",(int)size);
         map.put("items",issues);
 
         return map;
