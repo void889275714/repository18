@@ -1,11 +1,12 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.mapper.promote;
 
-import com.cskaoyan.bean.Ad;
-import com.cskaoyan.bean.AdExample;
+import com.cskaoyan.bean.promote.Ad;
+import com.cskaoyan.bean.promote.AdExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface AdMapper {
+
     long countByExample(AdExample example);
 
     int deleteByExample(AdExample example);

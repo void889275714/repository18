@@ -1,11 +1,12 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.mapper.promote;
 
-import com.cskaoyan.bean.topic;
-import com.cskaoyan.bean.topicExample;
+import com.cskaoyan.bean.promote.topic;
+import com.cskaoyan.bean.promote.topicExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface topicMapper {
+
     long countByExample(topicExample example);
 
     int deleteByExample(topicExample example);

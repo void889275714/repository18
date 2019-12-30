@@ -1,11 +1,12 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.mapper.promote;
 
-import com.cskaoyan.bean.Coupon;
-import com.cskaoyan.bean.CouponExample;
+import com.cskaoyan.bean.promote.Coupon;
+import com.cskaoyan.bean.promote.CouponExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CouponMapper {
+
     long countByExample(CouponExample example);
 
     int deleteByExample(CouponExample example);
