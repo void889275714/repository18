@@ -1,5 +1,7 @@
 package com.cskaoyan.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,7 +16,7 @@ public class Goods {
 
     private Integer brandId;
 
-    private String gallery;
+    private String[] gallery;
 
     private String keywords;
 
@@ -38,8 +40,10 @@ public class Goods {
 
     private BigDecimal retailPrice;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
@@ -86,12 +90,12 @@ public class Goods {
         this.brandId = brandId;
     }
 
-    public String getGallery() {
+    public String[] getGallery() {
         return gallery;
     }
 
-    public void setGallery(String gallery) {
-        this.gallery = gallery == null ? null : gallery.trim();
+    public void setGallery(String[] gallery) {
+        this.gallery = gallery;
     }
 
     public String getKeywords() {
@@ -211,6 +215,6 @@ public class Goods {
     }
 
     public void setDetail(String detail) {
-        this.detail = detail == null ? null : detail.trim();
+        this.detail = detail;
     }
 }

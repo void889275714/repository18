@@ -114,6 +114,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan.bean.GoodsProduct">
+    <selectKey order="AFTER" resultType="int" keyColumn="id" keyProperty="id">
+      select last_insert_id() as id
+    </selectKey>
     insert into cskaoyan_mall_goods_product
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -272,4 +275,7 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <update id="deleteByIdInIds">
+      update cskaoyan_mall_goods_product set deleted = 1 where goods_iD = #{goodsId} and id not in ${s}
+    </update>
 </mapper>

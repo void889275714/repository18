@@ -2,9 +2,11 @@ package com.cskaoyan.service;
 
 import com.cskaoyan.bean.Goods;
 import com.cskaoyan.bean.GoodsDetail;
-import com.cskaoyan.bean.ListConditon;
+import com.cskaoyan.bean.ListCondition;
+import com.cskaoyan.exception.ItemAlreadyExistException;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description TODO
@@ -13,9 +15,15 @@ import java.util.List;
  */
 public interface GoodsService {
 
-    List<Goods> queryAllGoods(ListConditon listConditon);
-
-    Long countGoods();
+    Map queryAllGoods(ListCondition listCondition);
 
     GoodsDetail queryGoodsDetail(int id);
+
+    Map<String, Object> queryCatAndBrand();
+
+    void updateGoodsDetail(GoodsDetail goodsDetail);
+
+    void createGoods(GoodsDetail goodsDetail) throws ItemAlreadyExistException;
+
+    void deleteGoods(Goods goods);
 }

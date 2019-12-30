@@ -2,7 +2,9 @@ package com.cskaoyan.mapper;
 
 import com.cskaoyan.bean.GoodsSpecification;
 import com.cskaoyan.bean.GoodsSpecificationExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface GoodsSpecificationMapper {
@@ -27,4 +29,6 @@ public interface GoodsSpecificationMapper {
     int updateByPrimaryKeySelective(GoodsSpecification record);
 
     int updateByPrimaryKey(GoodsSpecification record);
+
+    int deleteByIdInIds(@Param("s") String s, @Param("goodsId") Integer goodsId);
 }

@@ -2,7 +2,9 @@ package com.cskaoyan.mapper;
 
 import com.cskaoyan.bean.GoodsProduct;
 import com.cskaoyan.bean.GoodsProductExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface GoodsProductMapper {
@@ -27,4 +29,6 @@ public interface GoodsProductMapper {
     int updateByPrimaryKeySelective(GoodsProduct record);
 
     int updateByPrimaryKey(GoodsProduct record);
+
+    int deleteByIdInIds(@Param("s") String s, @Param("goodsId") Integer goodsId);
 }

@@ -10,7 +10,7 @@ public class GoodsProduct {
 
     private Integer goodsId;
 
-    private String specifications;
+    private String[] specifications;
 
     private BigDecimal price;
 
@@ -18,10 +18,10 @@ public class GoodsProduct {
 
     private String url;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "CMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "CMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
@@ -42,12 +42,12 @@ public class GoodsProduct {
         this.goodsId = goodsId;
     }
 
-    public String getSpecifications() {
+    public String[] getSpecifications() {
         return specifications;
     }
 
-    public void setSpecifications(String specifications) {
-        this.specifications = specifications == null ? null : specifications.trim();
+    public void setSpecifications(String[] specifications) {
+        this.specifications = specifications;
     }
 
     public BigDecimal getPrice() {
