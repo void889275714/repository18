@@ -6,6 +6,7 @@ import com.cskaoyan.bean.ListCondition;
 import java.util.Map;
 
 public interface AdminService {
+
     boolean queryAdminForLogin(String username,String password);
 
     Map queryUsers(ListCondition listCondition);
