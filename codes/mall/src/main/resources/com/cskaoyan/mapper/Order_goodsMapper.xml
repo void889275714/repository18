@@ -350,4 +350,9 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectGoodsAllMsg" resultType="com.cskaoyan.bean.GoodsAllMsg">
+select sum(price * number) as amount,count(*) as orders,date_format(add_time,'%Y-%m-%d') as day,sum(number) as products
+from cskaoyan_mall_order_goods group by Date_format(add_time,'%Y-%m-%d')
+  </select>
+
 </mapper>

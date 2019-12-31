@@ -50,18 +50,26 @@ public class GrServiceImpl implements GrService{
         int goodsId = createGrMsg.getGoodsId();
         //1.先从商品表获得对应的信息
           Goods goods=goodsMapper.selectByPrimaryKey(goodsId);
-          //2. 将商品信息和请求参数传入规则表
-        grouponRules.setGoodsId(createGrMsg.getGoodsId());
-        grouponRules.setDiscountMember(createGrMsg.getDiscountMember());
-        grouponRules.setDiscount(createGrMsg.getDiscount());
-        grouponRules.setExpireTime(createGrMsg.getExpireTime());
-        grouponRules.setAddTime( new Date());
-        grouponRules.setUpdateTime(new Date());
-        grouponRules.setGoodsName(goods.getName());
-        grouponRules.setPicUrl(goods.getPicUrl());
+        //判断商品id是否存在
 
-         grouponRulesMapper.insertSelective(grouponRules);
-        return grouponRules;
+          //2. 将商品信息和请求参数传入规则表
+        if(goods!=null){
+            grouponRules.setGoodsId(createGrMsg.getGoodsId());
+            grouponRules.setDiscountMember(createGrMsg.getDiscountMember());
+            grouponRules.setDiscount(createGrMsg.getDiscount());
+            grouponRules.setExpireTime(createGrMsg.getExpireTime());
+            grouponRules.setAddTime( new Date());
+            grouponRules.setUpdateTime(new Date());
+            grouponRules.setGoodsName(goods.getName());
+            grouponRules.setPicUrl(goods.getPicUrl());
+
+            grouponRulesMapper.insertSelective(grouponRules);
+            return grouponRules;
+        }
+        else {
+            return null;
+        }
+
     }
 
     @Override
@@ -77,16 +85,18 @@ public class GrServiceImpl implements GrService{
 
     @Override
     public boolean updateGrmsg(Groupon_rules groupon_rules) {
-
-        Groupon_rules grouponRules2 = new Groupon_rules();
-        grouponRules2=groupon_rules;
-
-        int i = grouponRulesMapper.updateByPrimaryKeySelective(grouponRules2);
-
-        if(i>0){
+        Integer id = groupon_rules.getId();
+        Integer goodsId1 = groupon_rules.getGoodsId();
+        //根据id查询要编辑的信息
+        Groupon_rules groupon_rules1 = grouponRulesMapper.selectByPrimaryKey(id);
+        //如果修改了商品的id则编辑不成功
+        Integer goodsId = groupon_rules1.getGoodsId();
+        if(goodsId1.equals(goodsId)){
+            Groupon_rules grouponRules2 =groupon_rules;
+            grouponRulesMapper.updateByPrimaryKeySelective(grouponRules2);
             return true;
+
         }
         return false;
-
     }
 }

@@ -1,5 +1,6 @@
 package com.cskaoyan.mapper;
 
+import com.cskaoyan.bean.GoodsAllMsg;
 import com.cskaoyan.bean.Order_goods;
 import com.cskaoyan.bean.Order_goodsExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface Order_goodsMapper {
     int updateByPrimaryKeySelective(Order_goods record);
 
     int updateByPrimaryKey(Order_goods record);
+
+    List<GoodsAllMsg> selectGoodsAllMsg();
 }

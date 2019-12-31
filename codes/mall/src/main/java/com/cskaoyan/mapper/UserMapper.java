@@ -2,6 +2,8 @@ package com.cskaoyan.mapper;
 
 import com.cskaoyan.bean.User;
 import com.cskaoyan.bean.UserExample;
+
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,7 +30,6 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    User selectUserByName(String username);
 
-    List<User> selectUsers();
+    Date queryStatUserBirthday(UserExample example);
 }
