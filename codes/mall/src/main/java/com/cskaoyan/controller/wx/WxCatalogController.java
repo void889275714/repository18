@@ -16,6 +16,11 @@ public class WxCatalogController {
     @Autowired
     CateGoryService cateGoryService;
 
+    /**
+     * 微信 --> 分类 --> 商品显示
+     * @param id
+     * @return
+     */
     @RequestMapping("wx/catalog/current")
     public BaseRespVo showCatalog(int id){
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();

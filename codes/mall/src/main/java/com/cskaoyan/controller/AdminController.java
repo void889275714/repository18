@@ -64,6 +64,21 @@ public class AdminController {
     }
 
 
+    /**
+     * 管理员登出
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("admin/auth/logout")
+    public BaseRespVo logout() throws Exception {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+
     @RequestMapping("admin/auth/info")
     public BaseRespVo info() {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
