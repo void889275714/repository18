@@ -4,6 +4,7 @@ import com.cskaoyan.bean.*;
 import com.cskaoyan.service.SystemAdminService;
 import com.cskaoyan.service.LogService;
 import com.cskaoyan.service.RoleService;
+import com.cskaoyan.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +64,7 @@ public class AdminSystemController {
      * @throws ParseException
      */
     @RequestMapping("admin/admin/create")
-    public BaseRespVo adminCreate(@RequestBody Admin admin) throws ParseException {
+    public BaseRespVo adminCreate(@RequestBody Admin admin) throws Exception {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
 
 
@@ -73,7 +74,9 @@ public class AdminSystemController {
         admin.setAddTime(parse);
         admin.setUpdateTime(parse);
         admin.setDeleted(false);
-        //在此处可以进行对密码加密，也可以移至 service 层进行处理
+        //在此处可以进行对密码加密，也可以移至 service 层进行处理,加盐了
+        String md5 = Md5Util.getMd5(admin.getPassword(),admin.getUsername());
+        admin.setPassword(md5);
 
         Admin data= systemAdminService.createAdmin(admin);
         baseRespVo.setData(data);
