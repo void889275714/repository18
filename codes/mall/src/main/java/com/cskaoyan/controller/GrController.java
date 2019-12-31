@@ -1,7 +1,7 @@
 package com.cskaoyan.controller;
 
 import com.cskaoyan.bean.Groupon_rules;
-import com.cskaoyan.bean.configmall.BaseRespVo;
+import com.cskaoyan.bean.BaseRespVo;
 import com.cskaoyan.bean.CreateGrMsg;
 import com.cskaoyan.bean.ListGrCondition;
 import com.cskaoyan.service.GrService;
@@ -39,6 +39,11 @@ public class GrController {
 
 
         Groupon_rules grouponRules = grService.insertGrMsg(createGrMsg);
+        if(grouponRules==null){
+            baseRespVo.setErrno(10000);
+            baseRespVo.setErrmsg("商品id输入有误");
+            return baseRespVo;
+        }
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
         baseRespVo.setData(grouponRules);
@@ -71,7 +76,7 @@ public class GrController {
             return baseRespVo;
         }
         baseRespVo.setErrno(10000);
-        baseRespVo.setErrmsg("失败");
+        baseRespVo.setErrmsg("商品id不能修改");
         return baseRespVo;
     }
 }

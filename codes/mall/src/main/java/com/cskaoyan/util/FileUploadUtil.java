@@ -1,4 +1,4 @@
-package com.cskaoyan.utils;
+package com.cskaoyan.util;
 
 import com.cskaoyan.bean.Storage;
 import org.springframework.web.multipart.MultipartFile;

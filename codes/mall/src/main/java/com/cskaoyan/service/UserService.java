@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserService {
     List<User> queryUsers(int pageNumber, int size);
+
+    boolean queryUserBySessionUsername();
 }

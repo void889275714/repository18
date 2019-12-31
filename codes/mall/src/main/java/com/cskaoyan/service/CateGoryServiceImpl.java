@@ -117,4 +117,26 @@ public class CateGoryServiceImpl implements CateGoryService{
     }
 
 
+    /**
+     * wx/catalog/current?id=1005002
+     * Wx
+     * @return
+     */
+    @Override
+    public Map<String, Object> wxCateList(int id) {
+        CateGoryExample cateGoryExample = new CateGoryExample();
+        cateGoryExample.createCriteria().andLevelEqualTo("L1").andIdEqualTo(id);
+        List<CateGory> cateGories = cateGoryMapper.selectByExample(cateGoryExample);
+        HashMap<String, Object> map = new HashMap<>();
+        //设置为map参数里面的currentCategory
+        CateGory cateGory1 = cateGories.get(0);
+        map.put("currentCategory",cateGory1);
+        CateGoryExample cateGoryExample1 = new CateGoryExample();
+        cateGoryExample1.createCriteria().andLevelEqualTo("L2").andIdEqualTo(id);
+        List<CateGory> cateGories1 = cateGoryMapper.selectByExample(cateGoryExample1);
+        map.put("currentSubCategory",cateGories1);
+        return map;
+    }
+
+
 }

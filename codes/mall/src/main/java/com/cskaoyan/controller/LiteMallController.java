@@ -6,7 +6,7 @@ import com.cskaoyan.bean.MallMsg;
 import com.cskaoyan.bean.OrderMsg;
 import com.cskaoyan.bean.WxMsg;
 
-import com.cskaoyan.bean.configmall.BaseRespVo;
+import com.cskaoyan.bean.BaseRespVo;
 import com.cskaoyan.service.LiteMallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

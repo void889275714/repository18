@@ -31,14 +31,14 @@ public class ShiroConfig {
      * ShiroFilterFactoryBean
      * @return
      */
-    //@Bean
+    @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //认证失败后重定向的网页，可更改
         shiroFilterFactoryBean.setLoginUrl("/unauthc");
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("admin/auth/login","anon");
+        filterChainDefinitionMap.put("/admin/auth/login","anon");
         //微信登录界面
         filterChainDefinitionMap.put("/wx/auth/login","anon");
         //微信分类界面
@@ -111,7 +111,7 @@ public class ShiroConfig {
     public CustomSessionManager sessionManager() {
         CustomSessionManager customSessionManager = new CustomSessionManager();
         customSessionManager.setDeleteInvalidSessions(true);
-        customSessionManager.setGlobalSessionTimeout(360000);
+        customSessionManager.setGlobalSessionTimeout(800000);
         return customSessionManager;
     }
 

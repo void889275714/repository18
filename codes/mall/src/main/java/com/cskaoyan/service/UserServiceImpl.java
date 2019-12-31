@@ -25,4 +25,15 @@ public class UserServiceImpl implements UserService{
         System.out.println("users size = " + users.size());
         return users;
     }
+
+
+    /**
+     * 查询数据库里是否有这样的值
+     * @return
+     */
+    @Override
+    public boolean queryUserBySessionUsername() {
+
+        return false;
+    }
 }

@@ -388,4 +388,7 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryStatUserBirthday" resultType="java.util.Date">
+  SELECT birthday FROM cskaoyan_mall_user where id=( SELECT MAX(id) FROM cskaoyan_mall_user)
+  </select>
 </mapper>

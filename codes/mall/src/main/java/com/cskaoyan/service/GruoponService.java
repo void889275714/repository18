@@ -10,9 +10,6 @@ import java.util.Map;
 
 public interface GruoponService {
 
-    Groupon_rules addRules(GrouponReceive grouponReceive);
-
-    boolean queryGoodsId(String goodsId);
 
     Map queryActivity(ListCondition listCondition);
 }

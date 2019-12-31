@@ -13,7 +13,7 @@ public class CustomSessionManager extends DefaultWebSessionManager {
     @Override
     protected Serializable getSessionId(ServletRequest servletRequest, ServletResponse response) {
         HttpServletRequest request = (HttpServletRequest)  servletRequest;
-        String header = request.getHeader("X-Litemall-Admin-Token");
+        String header = request.getHeader("X-cskaoyan-mall-Admin-Token");
         if (!StringUtils.isNullOrEmpty(header)) {
             return header;
         }

@@ -24,22 +24,11 @@ public class GruoponServiceImpl implements GruoponService {
     Groupon_rulesMapper groupon_rulesMapper;
     @Autowired
     GoodsMapper goodsMapper;
+    @Autowired
+    GrouponMapper grouponMapper;
 
 
-    @Override
-    public Groupon_rules addRules(GrouponReceive grouponReceive) {
-        return null;
-    }
 
-    @Override
-    public boolean queryGoodsId(String goodsId) {
-        Goods goods = goodsMapper.selectByPrimaryKey(Integer.valueOf(goodsId));
-        if (goods != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * 推广管理的团购活动的显示和搜索功能
@@ -48,16 +37,24 @@ public class GruoponServiceImpl implements GruoponService {
      */
     @Override
     public Map queryActivity(ListCondition listCondition) {
+        //获取参数中的分页变量和分页条数限制，开启分页
         PageHelper.startPage(listCondition.getPage(),listCondition.getLimit());
-        Groupon_rulesExample groupon_rulesExample = new Groupon_rulesExample();
-        Groupon_rulesExample.Criteria criteria = groupon_rulesExample.createCriteria();
+
+        //调用逆向工程的example
+        GrouponExample grouponExample = new GrouponExample();
+        GrouponExample.Criteria criteria = grouponExample.createCriteria();
+
+        // 对查询条件进行判断
         String goodsId = listCondition.getGoodsId();
         if (goodsId != null && goodsId.length() != 0 && goodsId != "") {
-            criteria.andGoodsIdEqualTo(Integer.valueOf(goodsId));
+            criteria.andIdEqualTo(Integer.valueOf(goodsId));
         }
-        groupon_rulesExample.setOrderByClause(listCondition.getSort() + " " + listCondition.getOrder());
-        List<Groupon_rules> list = groupon_rulesMapper.selectByExample(groupon_rulesExample);
-        PageInfo<Groupon_rules> pageInfo = new PageInfo<>(list);
+        criteria.andDeletedEqualTo(false);
+        // 根据参数中的条件进行排序
+        grouponExample.setOrderByClause(listCondition.getSort() + " " + listCondition.getOrder());
+        // 查询出总条目数
+        List<Groupon> list = grouponMapper.selectByExample(grouponExample);
+        PageInfo<Groupon> pageInfo = new PageInfo<>(list);
         long total = pageInfo.getTotal();
         HashMap<String, Object> map = new HashMap<>();
         map.put("total",total);

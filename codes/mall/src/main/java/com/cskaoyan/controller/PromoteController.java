@@ -1,12 +1,12 @@
-package com.cskaoyan.controller.promote;
+package com.cskaoyan.controller;
 
 import com.cskaoyan.bean.BaseRespVo;
 import com.cskaoyan.bean.ListCondition;
-import com.cskaoyan.bean.promote.Ad;
-import com.cskaoyan.bean.promote.Coupon;
-import com.cskaoyan.bean.promote.CouponExample;
-import com.cskaoyan.bean.promote.topic;
-import com.cskaoyan.service.promote.PromoteService;
+import com.cskaoyan.bean.Ad;
+import com.cskaoyan.bean.Coupon;
+import com.cskaoyan.bean.CouponExample;
+import com.cskaoyan.bean.topic;
+import com.cskaoyan.service.PromoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -398,7 +398,7 @@ public class PromoteController {
      * 注意：
      * typeHandler转换格式
      * 返回格式和前端一致
-     * @param coupon
+
      * @return
      */
     @RequestMapping("admin/coupon/read")

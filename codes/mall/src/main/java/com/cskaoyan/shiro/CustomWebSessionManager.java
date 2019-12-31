@@ -16,11 +16,11 @@ public class CustomWebSessionManager extends DefaultWebSessionManager {
     protected Serializable getSessionId(ServletRequest request1, ServletResponse response) {
         HttpServletRequest request = (HttpServletRequest) request1;
         //看看请求头是什么，跟这个一致即可
-        String header = request.getHeader("X-cskaoyanmall-admin-token");
+        String header = request.getHeader("X-cskaoyan-mall-Admin-Token");
         if (header != null && !"".equals(header)) {
             return header;
         }
-        String header1 = request.getHeader("X-cskaoyanmall-wx-token");
+        String header1 = request.getHeader("X-cskaoyan-mall-wx-token");
         if (header1 != null && !"".equals(header1)) {
             return header1;
         }

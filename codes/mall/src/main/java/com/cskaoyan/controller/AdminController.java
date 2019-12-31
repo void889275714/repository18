@@ -1,9 +1,15 @@
 package com.cskaoyan.controller;
 
+import com.cskaoyan.annotation.LogRecord;
 import com.cskaoyan.bean.BaseRespVo;
 import com.cskaoyan.bean.ListCondition;
 import com.cskaoyan.bean.LoginBean;
 import com.cskaoyan.service.AdminService;
+import com.cskaoyan.shiro.MallToken;
+import com.cskaoyan.util.Md5Util;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,23 +39,28 @@ public class AdminController {
      * 	"errmsg": "成功"
      * }
      */
+    @LogRecord
     @RequestMapping("admin/auth/login")
-    public BaseRespVo login(@RequestBody LoginBean loginBean) {
-        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
-       /* String username = loginBean.getUsername();
+    public BaseRespVo login(@RequestBody LoginBean loginBean) throws Exception {
+        String username = loginBean.getUsername();
         String password = loginBean.getPassword();
-        boolean flag = adminService.queryAdminForLogin(username,password);*/
-        /*if (flag) {
-            baseRespVo.setErrno(0);
-            //data的值以后还要修改，因为info 请求会用到*/
-            baseRespVo.setData("All-Star");
-            baseRespVo.setErrmsg("成功");
+        //这不是已经判断用户名和密码是否匹配了么
+        //加密过的
+        String md5 = Md5Util.getMd5(password, username);
+        MallToken token = new MallToken(username, md5, "admin");
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        Subject subject = SecurityUtils.getSubject();
+        try{
+        subject.login(token);
+        }catch (AuthenticationException e) {
+            baseRespVo.setErrno(10000);
+            baseRespVo.setErrmsg("用户名或密码错误，请重试！");
             return baseRespVo;
-       /* } else {
-            baseRespVo.setErrno(605);
-            baseRespVo.setErrmsg("用户账号或密码不正确");
-            return baseRespVo;
-        }*/
+        }
+        baseRespVo.setData(subject.getSession().getId());
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
     }
 
 

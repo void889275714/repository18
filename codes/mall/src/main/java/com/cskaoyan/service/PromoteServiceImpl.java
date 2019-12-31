@@ -48,18 +48,14 @@ public class PromoteServiceImpl implements PromoteService {
         String name = listCondition.getName();
         int type = listCondition.getType();
         String status1 = listCondition.getStatus();
-        int status = 0;
         if(status1 != null && !"".equals(status1)){
-            status = Integer.parseInt(status1);
+            criteria.andStatusEqualTo(Short.parseShort(status1));
         }
         if (name != null && name.length() > 0) {
             criteria.andNameLike("%" + name + "%");
         }
         if (type >= 0) {
             criteria.andTypeEqualTo((short) type);
-        }
-        if (status >= 0) {
-            criteria.andStatusEqualTo((short) status);
         }
         List<Coupon> couponLists = couponMapper.selectByExample(couponExample);
         long count = couponMapper.countByExample(couponExample);
@@ -76,8 +72,8 @@ public class PromoteServiceImpl implements PromoteService {
         int insert = couponMapper.insertSelective(coupon);
         //id会直接返回到Bean中
         Integer id = coupon.getId();
-        Coupon coupon1 = couponMapper.selectByPrimaryKey(id);
-        return coupon1;
+        //Coupon coupon1 = couponMapper.selectByPrimaryKey(id);
+        return coupon;
 
     }
 
@@ -152,10 +148,10 @@ public class PromoteServiceImpl implements PromoteService {
         criteria.andDeletedEqualTo(false);
         String title = listCondition.getTitle();
         String subtitle = listCondition.getSubtitle();
-        if (title != null && title.length() > 0 && !title.equals("")) {
+        if (title != null && title.length() > 0) {
             criteria.andTitleLike(("%" + title + "%"));
         }
-        if (subtitle != null && subtitle.length() > 0 && subtitle.equals("")) {
+        if (subtitle != null && subtitle.length() > 0) {
             criteria.andSubtitleLike("%" + subtitle + "%");
         }
         //拿到dao/mapper层返回的数据
