@@ -15,14 +15,6 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
-  <resultMap id="OyfResultMap" type="com.cskaoyan.bean.CateGoryForReturnBean">
-    <result column="id" jdbcType="INTEGER" property="value"/>
-    <result column="name" jdbcType="VARCHAR" property="label"/>
-    <collection property="children" ofType="com.cskaoyan.bean.CateGoryForReturnBean">
-      <result column="cid" jdbcType="INTEGER" property="value"/>
-      <result column="cname" jdbcType="VARCHAR" property="label"/>
-    </collection>
-  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -82,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, keywords, `desc`, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
+    id, `name`, keywords, `desc`, pid, icon_url, pic_url, `level`, sort_order, add_time, update_time,
     deleted
   </sql>
   <select id="selectByExample" parameterType="com.cskaoyan.bean.CateGoryExample" resultMap="BaseResultMap">
@@ -328,11 +320,4 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectFatherAndSonCategory" resultMap="OyfResultMap">
-    SELECT ca.id,ca.name,cat.id as cid,cat.name as cname
-    from cskaoyan_mall_category as ca
-    LEFT JOIN cskaoyan_mall_category as cat
-    ON ca.id = cat.pid
-    where ca.pid = 0
-  </select>
 </mapper>
