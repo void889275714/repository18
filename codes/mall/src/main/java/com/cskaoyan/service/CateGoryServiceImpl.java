@@ -132,8 +132,35 @@ public class CateGoryServiceImpl implements CateGoryService{
         CateGory cateGory1 = cateGories.get(0);
         map.put("currentCategory",cateGory1);
         CateGoryExample cateGoryExample1 = new CateGoryExample();
-        cateGoryExample1.createCriteria().andLevelEqualTo("L2").andIdEqualTo(id);
+        cateGoryExample1.createCriteria().andLevelEqualTo("L2").andPidEqualTo(id);
         List<CateGory> cateGories1 = cateGoryMapper.selectByExample(cateGoryExample1);
+        map.put("currentSubCategory",cateGories1);
+        return map;
+    }
+
+
+    /**
+     * wx/catalog/index
+     * @return
+     */
+    @Override
+    public Map<String, Object> wxCateIndexList() {
+        CateGoryExample cateGoryExample = new CateGoryExample();
+        cateGoryExample.createCriteria().andLevelEqualTo("L1");
+        List<CateGory> cateGories = cateGoryMapper.selectByExample(cateGoryExample);
+        HashMap<String, Object> map = new HashMap<>();
+        //设置为map参数里面的currentCategory
+        CateGory cateGory1 = cateGories.get(0);
+        //第一个默认显示
+        map.put("currentCategory",cateGory1);
+        //第二个list
+        map.put("categoryList",cateGories);
+
+        Integer id = cateGory1.getId();
+        CateGoryExample cateGoryExample1 = new CateGoryExample();
+        cateGoryExample1.createCriteria().andLevelEqualTo("L2").andPidEqualTo(id);
+        List<CateGory> cateGories1 = cateGoryMapper.selectByExample(cateGoryExample1);
+        //第三个，默认的子id
         map.put("currentSubCategory",cateGories1);
         return map;
     }

@@ -17,4 +17,6 @@ public interface CateGoryService {
     boolean deleteCateGory(CateGory cateGory);
 
     Map<String,Object> wxCateList(int id);
+
+    Map<String,Object> wxCateIndexList();
 }
