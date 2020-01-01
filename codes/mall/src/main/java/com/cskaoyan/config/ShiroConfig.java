@@ -1,10 +1,7 @@
 package com.cskaoyan.config;
 
 
-import com.cskaoyan.shiro.AdminRealm;
-import com.cskaoyan.shiro.CustomRealmAuthenticator;
-import com.cskaoyan.shiro.CustomSessionManager;
-import com.cskaoyan.shiro.WxRealm;
+import com.cskaoyan.shiro.*;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -41,6 +38,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/admin/auth/login","anon");
         //微信登录界面
         filterChainDefinitionMap.put("/wx/auth/login","anon");
+        //微信主页
+        filterChainDefinitionMap.put("/wx/home/index","anon");
         //微信分类界面
         filterChainDefinitionMap.put("/wx/catalog/**","anon");
         //微信分类 -- > goods 界面
@@ -51,7 +50,9 @@ public class ShiroConfig {
         //authc 代表除了上面的，都需要验证才能操作
         filterChainDefinitionMap.put("/index","anon");
         filterChainDefinitionMap.put("/unauthc","anon");
-        filterChainDefinitionMap.put("/**","authc");
+        //先都放行吧，写完了再设置
+        filterChainDefinitionMap.put("/**","anon");
+        //filterChainDefinitionMap.put("/**","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return shiroFilterFactoryBean;
@@ -64,7 +65,7 @@ public class ShiroConfig {
      */
     @Bean
     public DefaultWebSecurityManager securityManager(AdminRealm adminRealm, WxRealm wxRealm,
-                                                     CustomSessionManager sessionManager,
+                                                     CustomWebSessionManager sessionManager,
                                                      CustomRealmAuthenticator authenticator) {
 
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -108,11 +109,11 @@ public class ShiroConfig {
      * @return
      */
     @Bean
-    public CustomSessionManager sessionManager() {
-        CustomSessionManager customSessionManager = new CustomSessionManager();
-        customSessionManager.setDeleteInvalidSessions(true);
-        customSessionManager.setGlobalSessionTimeout(800000);
-        return customSessionManager;
+    public CustomWebSessionManager sessionManager() {
+        CustomWebSessionManager customWebSessionManager = new CustomWebSessionManager();
+        customWebSessionManager.setDeleteInvalidSessions(true);
+        customWebSessionManager.setGlobalSessionTimeout(800000);
+        return customWebSessionManager;
     }
 
 
