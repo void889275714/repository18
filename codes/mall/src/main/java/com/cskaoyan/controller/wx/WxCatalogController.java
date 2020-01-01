@@ -31,4 +31,18 @@ public class WxCatalogController {
         return baseRespVo;
     }
 
+    /**
+     * 不用登录，分类的显示
+     */
+    @RequestMapping("wx/catalog/index")
+    public BaseRespVo showCatalogIndex(){
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        Map<String, Object> data = cateGoryService.wxCateIndexList();
+        baseRespVo.setData(data);
+        return baseRespVo;
+    }
+
+
 }
