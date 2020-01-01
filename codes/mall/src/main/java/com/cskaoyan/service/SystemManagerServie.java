@@ -1,6 +1,7 @@
 package com.cskaoyan.service;
 
 
+import com.cskaoyan.bean.AuthorizeBean;
 import com.cskaoyan.bean.ListCondition;
 import com.cskaoyan.bean.Role;
 
@@ -14,5 +15,9 @@ public interface SystemManagerServie {
 
     Role addRole(Role role);
 
-    Role deleteRole(Role role);
+    boolean deleteRole(Role role);
+
+    Map queryPermissionsByRoleId(String roleId);
+
+    void authorizeByRoleId(AuthorizeBean authorizeBean);
 }

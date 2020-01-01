@@ -1,8 +1,11 @@
 package com.cskaoyan.mapper;
 
+import com.cskaoyan.bean.AllPermissions;
 import com.cskaoyan.bean.Permission;
 import com.cskaoyan.bean.PermissionExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PermissionMapper {
@@ -31,4 +34,8 @@ public interface PermissionMapper {
     List<String> selectPermissionByRoleId(@Param("roleIds") Integer[] roleIds, @Param("deleted") boolean deleted);
 
     int updatePermissionByRoleIdAndPermission(@Param("permission") Permission permission);
+
+    List<AllPermissions> selectFatherAndSonAndGrandsonPermission();
+
+    int countTopPermission();
 }
