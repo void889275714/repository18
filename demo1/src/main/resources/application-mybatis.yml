@@ -1,0 +1,4 @@
+mybatis:
+  mapper-locations: classpath:com.cskaoyan.mapper/*.xml
+  type-aliases-package: com.cskaoyan.bean
+  type-handlers-package: com.cskaoyan.typehandler
