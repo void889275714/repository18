@@ -34,13 +34,18 @@ spring:
   datasource:
       url: jdbc:mysql://127.0.0.1:3306/guns_rest?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=GMT%2B8
       username: root
-      password: root
+      password: 123456
       filters: log4j,wall,mergeStat
+
   application:
     name: film
   dubbo:
     server: true
-    registry: zookeeper://locaohost:2181
+    registry: zookeeper://localhost:2181
+    protocol:
+      name: dubbo
+      port: 20880
+
 logging:
   level.root: info
   level.com.stylefeng: debug

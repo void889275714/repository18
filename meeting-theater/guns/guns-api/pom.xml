@@ -54,7 +54,17 @@
             <artifactId>zkclient</artifactId>
             <version>0.9</version>
         </dependency>
+        <!--lombok插件 需要plugin手动添加lombok插件-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
+        </dependency>
+
+
     </dependencies>
+
 
     <build>
         <plugins>

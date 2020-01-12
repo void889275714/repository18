@@ -1,16 +1,16 @@
 package com.stylefeng.guns.rest.common.persistence.dao;
 
-import com.stylefeng.guns.rest.common.persistence.model.User;
+import com.stylefeng.guns.rest.common.persistence.model.MtimeBannerT;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
  * <p>
- *  Mapper 接口
+ * banner信息表 Mapper 接口
  * </p>
  *
  * @author ssl
  * @since 2020-01-11
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface MtimeBannerTMapper extends BaseMapper<MtimeBannerT> {
 
 }
