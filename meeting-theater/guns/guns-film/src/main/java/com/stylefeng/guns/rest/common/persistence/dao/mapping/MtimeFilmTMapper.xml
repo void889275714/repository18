@@ -18,9 +18,24 @@
         <result column="film_time" property="filmTime" />
         <result column="film_status" property="filmStatus" />
     </resultMap>
+    <select id="getFilmInfoById" resultType="com.stylefeng.guns.rest.cinema.vo.FilmInfo">
+        SELECT
+	f.film_id as filmId,
+	h.film_name as filmName,
+	h.film_language as filmType,
+	h.img_address as imgAddress,
+	h.film_cats as filmCats,
+	h.film_length as filmLength
+FROM
+	mtime_field_t f,
+	mtime_hall_film_info_t h
+WHERE
+	f.film_id = h.film_id
+	AND f.uuid = #{id}
+    </select>
 
-    <select id="getFilmDetailById" parameterType="java.lang.String" resultType="com.stylefeng.guns.vo.film.filmDetail.FilmDetailVO">
-      SELECT
+    <select id="getFilmDetailById" parameterType="java.lang.String" resultType="com.stylefeng.guns.rest.film.vo.film.filmDetail.FilmDetailVO">
+        SELECT
         film.`uuid` AS filmId,
 
         film.`film_name` AS filmName,
@@ -38,13 +53,13 @@
 
         CONCAT(film.`film_time`,(SELECT show_name FROM mtime_source_dict_t t WHERE t.uuid = film.uuid),'上映') info03
 
-      FROM mtime_film_t film,mtime_film_info_t info
-      WHERE film.`UUID` =info.`film_id`
-      AND film.`UUID`= #{uuid}
+        FROM mtime_film_t film,mtime_film_info_t info
+        WHERE film.`UUID` =info.`film_id`
+        AND film.`UUID`= #{uuid}
     </select>
 
-    <select id="getFilmDetailByName" parameterType="java.lang.String" resultType="com.stylefeng.guns.vo.film.filmDetail.FilmDetailVO">
-      SELECT
+    <select id="getFilmDetailByName" parameterType="java.lang.String" resultType="com.stylefeng.guns.rest.film.vo.film.filmDetail.FilmDetailVO">
+        SELECT
         film.`uuid` AS filmId,
 
         film.`film_name` AS filmName,
@@ -62,9 +77,8 @@
 
         CONCAT(film.`film_time`,(SELECT show_name FROM mtime_source_dict_t t WHERE t.uuid = film.uuid),'上映') info03
 
-      FROM mtime_film_t film,mtime_film_info_t info
-      WHERE film.`UUID` =info.`film_id`
-      AND film.film_name  LIKE #{filmName}
+        FROM mtime_film_t film,mtime_film_info_t info
+        WHERE film.`UUID` =info.`film_id`
+        AND film.film_name  LIKE #{filmName}
     </select>
-
 </mapper>

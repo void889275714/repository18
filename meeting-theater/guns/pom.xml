@@ -18,6 +18,11 @@
         <module>guns-api</module>
         <module>guns-user</module>
         <module>guns-generator</module>
+        <module>guns-order</module>
+        <module>guns-alipay</module>
+        <module>guns-promo</module>
+        <module>guns-pay</module>
+
     </modules>
 
     <parent>

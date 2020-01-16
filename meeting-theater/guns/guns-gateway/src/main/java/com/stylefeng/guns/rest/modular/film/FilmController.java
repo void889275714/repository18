@@ -1,17 +1,18 @@
 package com.stylefeng.guns.rest.modular.film;
 
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.rpc.RpcContext;
-import com.stylefeng.guns.film.service.FilmAsynServiceAPI;
-import com.stylefeng.guns.film.service.FilmServiceAPI;
+import com.stylefeng.guns.rest.film.service.FilmAsynServiceAPI;
+import com.stylefeng.guns.rest.film.service.FilmServiceAPI;
+import com.stylefeng.guns.rest.film.vo.film.banner.*;
+import com.stylefeng.guns.rest.film.vo.film.condition.CatVO;
+import com.stylefeng.guns.rest.film.vo.film.condition.SourceVO;
+import com.stylefeng.guns.rest.film.vo.film.condition.YearVO;
+import com.stylefeng.guns.rest.film.vo.film.filmDetail.*;
 import com.stylefeng.guns.rest.modular.film.vo.FilmConditionVO;
 import com.stylefeng.guns.rest.modular.film.vo.FilmIndexVO;
 import com.stylefeng.guns.rest.modular.film.vo.FilmRequestVO;
-import com.stylefeng.guns.vo.film.filmDetail.*;
-import com.stylefeng.guns.vo.film.banner.*;
-import com.stylefeng.guns.vo.film.condition.CatVO;
-import com.stylefeng.guns.vo.film.condition.SourceVO;
-import com.stylefeng.guns.vo.film.condition.YearVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -206,7 +207,7 @@ public class FilmController {
     }
 
     @RequestMapping(value = "/films/{searchParam}", method = RequestMethod.GET)
-    public ResponseVO films(@PathVariable("searchParam") String searchParam,int searchType) throws ExecutionException, InterruptedException {
+    public ResponseVO films(@PathVariable("searchParam") String searchParam, int searchType) throws ExecutionException, InterruptedException {
         //根据searchType 判断查询类型
         FilmDetailVO filmDetails = filmServiceAPI.getFilmDetails(searchType, searchParam);
         //查询失败返回

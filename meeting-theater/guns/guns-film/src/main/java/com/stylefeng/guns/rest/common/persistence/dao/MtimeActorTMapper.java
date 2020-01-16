@@ -1,8 +1,9 @@
 package com.stylefeng.guns.rest.common.persistence.dao;
 
-import com.stylefeng.guns.rest.common.persistence.model.MtimeActorT;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.stylefeng.guns.vo.film.filmDetail.ActorVO;
+import com.stylefeng.guns.rest.common.persistence.model.MtimeActorT;
+
+import com.stylefeng.guns.rest.film.vo.film.filmDetail.ActorVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,6 +17,6 @@ import java.util.List;
  * @since 2020-01-11
  */
 public interface MtimeActorTMapper extends BaseMapper<MtimeActorT> {
-    List<ActorVO> getActors(@Param("filmId")String filmId);
+    List<ActorVO> getActors(@Param("filmId") String filmId);
 
 }

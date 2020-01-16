@@ -5,6 +5,7 @@ import com.stylefeng.guns.rest.modular.auth.validator.dto.Credence;
 /**
  * 认证的请求dto
  *
+ * data transfer object
  * @author fengshuonan
  * @Date 2017/8/24 14:00
  */

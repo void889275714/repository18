@@ -1,8 +1,9 @@
 package com.stylefeng.guns.rest.modular.film.vo;
 
-import com.stylefeng.guns.vo.film.condition.CatVO;
-import com.stylefeng.guns.vo.film.condition.SourceVO;
-import com.stylefeng.guns.vo.film.condition.YearVO;
+
+import com.stylefeng.guns.rest.film.vo.film.condition.CatVO;
+import com.stylefeng.guns.rest.film.vo.film.condition.SourceVO;
+import com.stylefeng.guns.rest.film.vo.film.condition.YearVO;
 import lombok.Data;
 
 import java.io.Serializable;

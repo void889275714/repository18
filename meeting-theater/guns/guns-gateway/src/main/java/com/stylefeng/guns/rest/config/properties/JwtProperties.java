@@ -3,6 +3,8 @@ package com.stylefeng.guns.rest.config.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 /**
  * jwt相关配置
  *
@@ -14,6 +16,15 @@ import org.springframework.context.annotation.Configuration;
 public class JwtProperties {
 
     public static final String JWT_PREFIX = "jwt";
+    public List<String> getUrlList() {
+        return urlList;
+    }
+
+    public void setUrlList(List<String> urlList) {
+        this.urlList = urlList;
+    }
+
+    private List<String> urlList;
 
     private String header = "Authorization";
 

@@ -41,6 +41,12 @@
             <groupId>com.stylefeng</groupId>
             <artifactId>guns-core</artifactId>
         </dependency>
+        <!--springboot测试包-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
     </dependencies>
 
     <build>

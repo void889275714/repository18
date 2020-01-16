@@ -34,7 +34,9 @@ public class AuthController {
         boolean validate = reqValidator.validate(authRequest);
 
         if (validate) {
+            //生成六位RandomKey
             final String randomKey = jwtTokenUtil.getRandomKey();
+            //传入username 和 RandomKey
             final String token = jwtTokenUtil.generateToken(authRequest.getUserName(), randomKey);
             return ResponseEntity.ok(new AuthResponse(token, randomKey));
         } else {

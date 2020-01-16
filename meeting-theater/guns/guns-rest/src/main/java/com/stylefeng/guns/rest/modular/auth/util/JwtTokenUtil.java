@@ -117,9 +117,12 @@ public class JwtTokenUtil {
 
     /**
      * 生成token
+     *
+     * token username\randomKey\createTime\expireTime\secret\SignatureAlgorithm
      */
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         final Date createdDate = new Date();
+        //过期时间
         final Date expirationDate = new Date(createdDate.getTime() + jwtProperties.getExpiration() * 1000);
 
         return Jwts.builder()

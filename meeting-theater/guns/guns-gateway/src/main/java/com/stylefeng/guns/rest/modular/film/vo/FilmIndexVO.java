@@ -1,6 +1,7 @@
 package com.stylefeng.guns.rest.modular.film.vo;
 
-import com.stylefeng.guns.vo.film.banner.*;
+
+import com.stylefeng.guns.rest.film.vo.film.banner.*;
 import lombok.Data;
 
 import java.io.Serializable;
