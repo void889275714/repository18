@@ -15,6 +15,8 @@ public class ListCondition {
     int limit;
     String sort;
     String order;
+    int size;
+    String categoryId;
     /**
      * 用于商品搜索，非模糊查询
      * 商品编号

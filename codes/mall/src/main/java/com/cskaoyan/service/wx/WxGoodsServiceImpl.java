@@ -16,18 +16,18 @@ import java.util.Map;
  * @author bruce
  */
 @Service
-public class WxGoodsServiceImpl implements WxGoodsService {
+public class WxGoodsServiceImpl implements com.cskaoyan.service.WxGoodsService {
 
     @Autowired
     CateGoryMapper cateGoryMapper;
     @Autowired
     GoodsMapper goodsMapper;
     @Autowired
-    Goods_attributeMapper goods_attributeMapper;
+    GoodsAttributeMapper goods_attributeMapper;
     @Autowired
     BrandMapper brandMapper;
     @Autowired
-    Goods_specificationMapper specificationMapper;
+    GoodsSpecificationMapper specificationMapper;
     @Autowired
     Groupon_rulesMapper groupon_rulesMapper;
     @Autowired
@@ -37,7 +37,7 @@ public class WxGoodsServiceImpl implements WxGoodsService {
     @Autowired
     CommentMapper commentMapper;
     @Autowired
-    Goods_productMapper goods_productMapper;
+    GoodsProductMapper goods_productMapper;
 
     /**
      * 展示商品的categories
@@ -138,11 +138,11 @@ public class WxGoodsServiceImpl implements WxGoodsService {
         map.put("info",goods);
 
         //查询attribute
-        Goods_attributeExample goods_attributeExample = new Goods_attributeExample();
-        Goods_attributeExample.Criteria criteria = goods_attributeExample.createCriteria();
+        GoodsAttributeExample goods_attributeExample = new GoodsAttributeExample();
+        GoodsAttributeExample.Criteria criteria = goods_attributeExample.createCriteria();
         criteria.andGoodsIdEqualTo(id);
         criteria.andDeletedEqualTo(false);
-        List<Goods_attribute> goodsAttributes = goods_attributeMapper.selectByExample(goods_attributeExample);
+        List<GoodsAttribute> goodsAttributes = goods_attributeMapper.selectByExample(goods_attributeExample);
         map.put("attribute",goodsAttributes);
 
         //查询brand
@@ -152,14 +152,14 @@ public class WxGoodsServiceImpl implements WxGoodsService {
         map.put("brand",brand);
 
         //查询specification list
-        Goods_specificationExample goodsSpecificationExample = new Goods_specificationExample();
-        Goods_specificationExample.Criteria criteria1 = goodsSpecificationExample.createCriteria();
+        GoodsSpecificationExample goodsSpecificationExample = new GoodsSpecificationExample();
+        GoodsSpecificationExample.Criteria criteria1 = goodsSpecificationExample.createCriteria();
         //拼接查询条件
         criteria1.andDeletedEqualTo(false);
         criteria1.andGoodsIdEqualTo(id);
-        List<Goods_specification> goods_specifications = specificationMapper.selectByExample(goodsSpecificationExample);
+        List<GoodsSpecification> goods_specifications = specificationMapper.selectByExample(goodsSpecificationExample);
         ArrayList<Map> maps = new ArrayList<>();
-        for (Goods_specification goodsSpecification : goods_specifications) {
+        for (GoodsSpecification goodsSpecification : goods_specifications) {
             HashMap<String, Object> map1 = new HashMap<>();
             map1.put("name",goodsSpecification.getSpecification());
             ArrayList<Object> arrayList = new ArrayList<>();
@@ -207,11 +207,11 @@ public class WxGoodsServiceImpl implements WxGoodsService {
         map.put("comment",map1);
 
         //productList
-        Goods_productExample goods_productExample = new Goods_productExample();
-        Goods_productExample.Criteria criteria5 = goods_productExample.createCriteria();
+        GoodsProductExample goods_productExample = new GoodsProductExample();
+        GoodsProductExample.Criteria criteria5 = goods_productExample.createCriteria();
         criteria5.andDeletedEqualTo(false);
         criteria5.andGoodsIdEqualTo(id);
-        List<Goods_product> goods_products = goods_productMapper.selectByExample(goods_productExample);
+        List<GoodsProduct> goods_products = goods_productMapper.selectByExample(goods_productExample);
         map.put("productList",goods_products);
 
 
